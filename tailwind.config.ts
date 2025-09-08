@@ -13,7 +13,19 @@ export default {
       },
     },
     extend: {
+      /* LinkedIn Brand Fonts */
+      fontFamily: {
+        'source-sans': ['Source Sans Pro', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif'],
+      },
       colors: {
+        /* LinkedIn Brand Colors */
+        linkedin: {
+          blue: "hsl(var(--linkedin-blue))",
+          gray: "hsl(var(--linkedin-gray))",
+          dark: "hsl(var(--linkedin-dark))",
+          light: "hsl(var(--linkedin-light))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -57,6 +69,14 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        /* Chart Colors */
+        chart: {
+          1: "hsl(var(--primary))",          /* LinkedIn Blue */
+          2: "hsl(197 100% 35%)",            /* Darker LinkedIn Blue */
+          3: "hsl(var(--linkedin-gray))",    /* LinkedIn Gray */
+          4: "hsl(142 76% 36%)",             /* Success Green */
+          5: "hsl(47 96% 56%)",              /* Warning Yellow */
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -65,25 +85,42 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0", opacity: "0" },
+          to: { height: "var(--radix-accordion-content-height)", opacity: "1" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)", opacity: "1" },
+          to: { height: "0", opacity: "0" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "slide-up": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "scale-in": {
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "pulse-grow": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
+        },
+        "counter-up": {
+          "0%": { transform: "translateY(20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        "accordion-down": "accordion-down 0.3s ease-out",
+        "accordion-up": "accordion-up 0.3s ease-out",
+        "fade-in": "fade-in 0.5s ease-out",
+        "slide-up": "slide-up 0.4s ease-out",
+        "scale-in": "scale-in 0.3s ease-out",
+        "pulse-grow": "pulse-grow 2s ease-in-out infinite",
+        "counter-up": "counter-up 0.6s ease-out",
       },
     },
   },
