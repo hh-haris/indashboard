@@ -95,19 +95,19 @@ const winsData: WinMetric[] = [
   },
   {
     id: "closed-deals",
-    title: "Closed Deals",
-    value: "7",
+    title: "New Connections",
+    value: "47",
     change: 16.7,
     icon: Handshake,
-    description: "Successfully closed business deals",
+    description: "Successfully established professional connections",
     details: {
-      currentWeek: 7,
-      lastWeek: 6,
+      currentWeek: 47,
+      lastWeek: 40,
       trend: 'up',
       breakdown: [
-        { label: "Consulting Projects", value: "4", description: "Long-term consulting engagements" },
-        { label: "Training Programs", value: "2", description: "Corporate training contracts" },
-        { label: "Speaking Engagements", value: "1", description: "Paid speaking opportunities" },
+        { label: "Industry Professionals", value: "28", description: "Connections within your industry" },
+        { label: "Potential Collaborators", value: "12", description: "People for potential partnerships" },
+        { label: "Thought Leaders", value: "7", description: "Influential professionals in your field" },
       ]
     }
   }
@@ -139,7 +139,7 @@ const CloseIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="h-4 w-4 text-foreground"
+    className="h-4 w-4 text-muted-foreground"
   >
     <path d="M18 6l-12 12" />
     <path d="M6 6l12 12" />
@@ -172,11 +172,11 @@ export function WeeklyWinsCard() {
 
   return (
     <section className="animate-fade-in">
-      <div className="mb-6">
-        <h2 className="text-2xl font-source-sans font-semibold text-foreground mb-2">
-          This Week's Wins
+      <div className="mb-8">
+        <h2 className="text-3xl font-source-sans font-bold text-foreground mb-3">
+          This Week's Performance
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-lg text-muted-foreground">
           Click any metric to see detailed breakdown and insights
         </p>
       </div>
@@ -202,7 +202,7 @@ export function WeeklyWinsCard() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
-              className="flex absolute top-4 right-4 lg:hidden items-center justify-center bg-card rounded-full h-8 w-8 border border-border"
+              className="flex absolute top-4 right-4 lg:hidden items-center justify-center bg-card rounded-full h-10 w-10 border border-border hover:bg-muted transition-colors"
               onClick={() => setActive(null)}
             >
               <CloseIcon />
@@ -214,33 +214,33 @@ export function WeeklyWinsCard() {
             >
               <motion.div
                 layoutId={`header-${active.title}-${id}`}
-                className="p-6 border-b border-border bg-gradient-to-r from-primary/5 to-primary/10"
+                className="p-8 border-b border-border bg-gradient-to-r from-muted/30 to-muted/10"
               >
                 <div className="flex items-start justify-between">
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-6">
                     <motion.div
                       layoutId={`icon-${active.title}-${id}`}
-                      className="p-3 bg-primary/10 rounded-lg"
+                      className="p-4 bg-muted rounded-xl"
                     >
-                      <active.icon className="h-6 w-6 text-primary" />
+                      <active.icon className="h-8 w-8 text-muted-foreground" />
                     </motion.div>
                     <div>
                       <motion.h3
                         layoutId={`title-${active.title}-${id}`}
-                        className="text-xl font-source-sans font-semibold text-foreground"
+                        className="text-2xl font-source-sans font-bold text-foreground mb-2"
                       >
                         {active.title}
                       </motion.h3>
                       <motion.p
                         layoutId={`description-${active.description}-${id}`}
-                        className="text-muted-foreground mt-1"
+                        className="text-muted-foreground text-lg"
                       >
                         {active.description}
                       </motion.p>
                     </div>
                   </div>
                   <motion.button
-                    className="hidden lg:flex items-center justify-center bg-background rounded-full h-8 w-8 border border-border hover:bg-muted transition-colors"
+                    className="hidden lg:flex items-center justify-center bg-background rounded-full h-10 w-10 border border-border hover:bg-muted transition-colors"
                     onClick={() => setActive(null)}
                   >
                     <CloseIcon />
@@ -248,25 +248,25 @@ export function WeeklyWinsCard() {
                 </div>
               </motion.div>
 
-              <div className="flex-1 overflow-auto p-6">
+              <div className="flex-1 overflow-auto p-8">
                 <motion.div
                   layout
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="space-y-6"
+                  className="space-y-8"
                 >
                   {/* Summary Stats */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="linkedin-card p-4">
-                      <p className="text-sm text-muted-foreground">This Week</p>
-                      <p className="text-2xl font-semibold text-foreground">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="linkedin-card p-6 text-center">
+                      <p className="text-sm text-muted-foreground mb-2">This Week</p>
+                      <p className="text-3xl font-bold text-foreground">
                         {active.details.currentWeek.toLocaleString()}
                       </p>
                     </div>
-                    <div className="linkedin-card p-4">
-                      <p className="text-sm text-muted-foreground">Last Week</p>
-                      <p className="text-2xl font-semibold text-foreground">
+                    <div className="linkedin-card p-6 text-center">
+                      <p className="text-sm text-muted-foreground mb-2">Last Week</p>
+                      <p className="text-3xl font-bold text-foreground">
                         {active.details.lastWeek.toLocaleString()}
                       </p>
                     </div>
@@ -274,24 +274,24 @@ export function WeeklyWinsCard() {
 
                   {/* Breakdown */}
                   <div>
-                    <h4 className="font-source-sans font-semibold text-foreground mb-4">
+                    <h4 className="font-source-sans font-bold text-xl text-foreground mb-6">
                       Detailed Breakdown
                     </h4>
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       {active.details.breakdown.map((item, index) => (
                         <motion.div
                           key={item.label}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="linkedin-card p-4"
+                          className="linkedin-card p-6"
                         >
                           <div className="flex justify-between items-start">
                             <div className="flex-1">
-                              <p className="font-medium text-foreground">{item.label}</p>
-                              <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                              <p className="font-semibold text-foreground text-lg mb-2">{item.label}</p>
+                              <p className="text-muted-foreground">{item.description}</p>
                             </div>
-                            <p className="text-lg font-semibold text-primary ml-4">{item.value}</p>
+                            <p className="text-2xl font-bold text-primary ml-6">{item.value}</p>
                           </div>
                         </motion.div>
                       ))}
@@ -305,7 +305,7 @@ export function WeeklyWinsCard() {
       </AnimatePresence>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         {winsData.map((win, index) => {
           const Icon = win.icon;
           const isPositive = win.change > 0;
@@ -318,45 +318,44 @@ export function WeeklyWinsCard() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               onClick={() => setActive(win)}
-              className="linkedin-card hover-lift cursor-pointer group"
+              className="linkedin-card hover-lift cursor-pointer group p-6"
             >
-              <CardHeader className="pb-3">
-                <div className="flex items-start justify-between">
-                  <motion.div
-                    layoutId={`icon-${win.title}-${id}`}
-                    className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors"
-                  >
-                    <Icon className="h-4 w-4 text-primary" />
-                  </motion.div>
-                  <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
-                    isPositive 
-                      ? 'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400' 
-                      : 'bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400'
-                  }`}>
-                    {isPositive ? (
-                      <TrendingUp className="h-3 w-3" />
-                    ) : (
-                      <TrendingDown className="h-3 w-3" />
-                    )}
-                    {Math.abs(win.change)}%
-                  </div>
+              <div className="flex items-start justify-between mb-4">
+                <motion.div
+                  layoutId={`icon-${win.title}-${id}`}
+                  className="p-3 bg-muted rounded-lg group-hover:bg-muted/80 transition-colors"
+                >
+                  <Icon className="h-6 w-6 text-muted-foreground" />
+                </motion.div>
+                <div className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${
+                  isPositive 
+                    ? 'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400' 
+                    : 'bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400'
+                }`}>
+                  {isPositive ? (
+                    <TrendingUp className="h-4 w-4" />
+                  ) : (
+                    <TrendingDown className="h-4 w-4" />
+                  )}
+                  {Math.abs(win.change)}%
                 </div>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <motion.h3
-                  layoutId={`title-${win.title}-${id}`}
-                  className="font-source-sans font-semibold text-foreground text-sm mb-1"
-                >
-                  {win.title}
-                </motion.h3>
-                <p className="text-2xl font-bold text-foreground mb-2">{win.value}</p>
-                <motion.p
-                  layoutId={`description-${win.description}-${id}`}
-                  className="text-xs text-muted-foreground"
-                >
-                  vs last week
-                </motion.p>
-              </CardContent>
+              </div>
+              
+              <motion.h3
+                layoutId={`title-${win.title}-${id}`}
+                className="font-source-sans font-bold text-foreground text-lg mb-3"
+              >
+                {win.title}
+              </motion.h3>
+              
+              <p className="text-3xl font-bold text-foreground mb-3">{win.value}</p>
+              
+              <motion.p
+                layoutId={`description-${win.description}-${id}`}
+                className="text-sm text-muted-foreground"
+              >
+                vs last week
+              </motion.p>
             </motion.div>
           );
         })}

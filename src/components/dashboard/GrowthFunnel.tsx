@@ -10,7 +10,6 @@ interface FunnelStage {
   title: string;
   value: number;
   icon: React.ElementType;
-  color: string;
   description: string;
   conversionRate?: number;
 }
@@ -21,7 +20,6 @@ const funnelData: FunnelStage[] = [
     title: "Comments Posted",
     value: 156,
     icon: MessageSquare,
-    color: "hsl(var(--primary))",
     description: "Thought-leadership comments across LinkedIn",
   },
   {
@@ -29,7 +27,6 @@ const funnelData: FunnelStage[] = [
     title: "Impressions Generated",
     value: 33400,
     icon: Eye,
-    color: "hsl(197 100% 35%)",
     description: "Total reach across all content",
     conversionRate: 85.2,
   },
@@ -38,7 +35,6 @@ const funnelData: FunnelStage[] = [
     title: "Profile Views",
     value: 847,
     icon: Users,
-    color: "hsl(var(--linkedin-gray))",
     description: "People who viewed your profile",
     conversionRate: 2.5,
   },
@@ -47,7 +43,6 @@ const funnelData: FunnelStage[] = [
     title: "Connection Requests",
     value: 89,
     icon: Users,
-    color: "hsl(142 76% 36%)",
     description: "New connection requests received",
     conversionRate: 10.5,
   },
@@ -56,17 +51,15 @@ const funnelData: FunnelStage[] = [
     title: "Booked Calls",
     value: 23,
     icon: Phone,
-    color: "hsl(47 96% 56%)",  
     description: "Discovery calls and meetings scheduled",
     conversionRate: 25.8,
   },
   {
-    id: "deals",
-    title: "Closed Deals",
+    id: "partnerships",
+    title: "New Partnerships",
     value: 7,
     icon: Handshake,
-    color: "hsl(0 84% 60%)",
-    description: "Successfully closed business deals",
+    description: "Successfully established professional partnerships",
     conversionRate: 30.4,
   },
 ];
@@ -76,26 +69,26 @@ export function GrowthFunnel() {
 
   return (
     <section className="animate-scale-in">
-      <div className="mb-6">
-        <h2 className="text-2xl font-source-sans font-semibold text-foreground mb-2">
+      <div className="mb-8">
+        <h2 className="text-3xl font-source-sans font-bold text-foreground mb-3">
           Growth Funnel
         </h2>
-        <p className="text-muted-foreground">
-          Your LinkedIn engagement to business conversion pipeline
+        <p className="text-lg text-muted-foreground">
+          Your LinkedIn engagement to professional connection pipeline
         </p>
       </div>
 
       <Card className="linkedin-card">
-        <CardHeader>
-          <CardTitle className="font-source-sans flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-primary" />
-            LinkedIn Business Funnel
+        <CardHeader className="pb-6">
+          <CardTitle className="font-source-sans font-bold text-2xl flex items-center gap-3">
+            <TrendingUp className="h-6 w-6 text-primary" />
+            LinkedIn Professional Growth Funnel
           </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Track how your LinkedIn activities convert to business outcomes
+          <p className="text-base text-muted-foreground">
+            Track how your LinkedIn activities convert to professional outcomes
           </p>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
           {funnelData.map((stage, index) => {
             const Icon = stage.icon;
             const widthPercentage = (stage.value / maxValue) * 100;
@@ -107,34 +100,28 @@ export function GrowthFunnel() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="linkedin-card p-4 hover-lift"
+                  className="linkedin-card p-6 hover-lift"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <div 
-                        className="p-2 rounded-lg"
-                        style={{ backgroundColor: `${stage.color}15` }}
-                      >
-                        <Icon 
-                          className="h-5 w-5" 
-                          style={{ color: stage.color }}
-                        />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 bg-muted rounded-xl">
+                        <Icon className="h-6 w-6 text-muted-foreground" />
                       </div>
                       <div>
-                        <h3 className="font-source-sans font-semibold text-foreground">
+                        <h3 className="font-source-sans font-bold text-foreground text-lg">
                           {stage.title}
                         </h3>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-muted-foreground">
                           {stage.description}
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-foreground">
+                      <div className="text-3xl font-bold text-foreground">
                         {stage.value.toLocaleString()}
                       </div>
                       {stage.conversionRate && (
-                        <div className="text-sm text-green-600 font-medium">
+                        <div className="text-sm text-green-600 font-medium mt-1">
                           {stage.conversionRate}% conversion
                         </div>
                       )}
@@ -143,13 +130,12 @@ export function GrowthFunnel() {
                   
                   {/* Funnel Bar */}
                   <div className="relative">
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-3 bg-muted rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${widthPercentage}%` }}
                         transition={{ delay: index * 0.1 + 0.3, duration: 0.8 }}
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: stage.color }}
+                        className="h-full rounded-full bg-primary"
                       />
                     </div>
                   </div>
@@ -158,12 +144,12 @@ export function GrowthFunnel() {
                 {/* Arrow connector */}
                 {!isLast && (
                   <motion.div 
-                    className="flex justify-center py-2"
+                    className="flex justify-center py-3"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: index * 0.1 + 0.5 }}
                   >
-                    <ArrowDown className="h-4 w-4 text-muted-foreground" />
+                    <ArrowDown className="h-5 w-5 text-muted-foreground" />
                   </motion.div>
                 )}
               </div>
@@ -175,31 +161,26 @@ export function GrowthFunnel() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: funnelData.length * 0.1 + 0.3 }}
-            className="mt-6 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20"
+            className="mt-8 p-6 bg-gradient-to-r from-muted/30 to-muted/10 rounded-xl border border-border"
           >
-            <h4 className="font-source-sans font-semibold text-foreground mb-2">
-              Funnel Performance
+            <h4 className="font-source-sans font-bold text-foreground text-xl mb-4">
+              Funnel Performance Summary
             </h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-              <div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">Overall Conversion</p>
-                <p className="text-lg font-bold text-primary">4.5%</p>
-                <p className="text-xs text-muted-foreground">Comments → Deals</p>
+                <p className="text-2xl font-bold text-primary">4.5%</p>
+                <p className="text-xs text-muted-foreground">Comments → Partnerships</p>
               </div>
-              <div>
+              <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">Best Stage</p>
-                <p className="text-lg font-bold text-green-600">30.4%</p>
-                <p className="text-xs text-muted-foreground">Calls → Deals</p>
+                <p className="text-2xl font-bold text-green-600">30.4%</p>
+                <p className="text-xs text-muted-foreground">Calls → Partnerships</p>
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Total Revenue</p>
-                <p className="text-lg font-bold text-foreground">$47.2K</p>
-                <p className="text-xs text-muted-foreground">This month</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Avg Deal Size</p>
-                <p className="text-lg font-bold text-foreground">$6.7K</p>
-                <p className="text-xs text-muted-foreground">Per closed deal</p>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Total Connections</p>
+                <p className="text-2xl font-bold text-foreground">2.1K</p>
+                <p className="text-xs text-muted-foreground">Network growth</p>
               </div>
             </div>
           </motion.div>

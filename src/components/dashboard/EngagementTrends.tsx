@@ -29,15 +29,15 @@ const chartConfig = {
   },
   postImpressions: {
     label: "Post Impressions", 
-    color: "hsl(197 100% 35%)",
+    color: "hsl(var(--muted-foreground))",
   },
   allImpressions: {
     label: "All Impressions",
-    color: "hsl(var(--linkedin-gray))",
+    color: "hsl(var(--muted-foreground))",
   },
   engagements: {
     label: "Total Engagements",
-    color: "hsl(142 76% 36%)",
+    color: "hsl(var(--muted-foreground))",
   },
 } satisfies ChartConfig;
 
@@ -66,9 +66,9 @@ export function EngagementTrends() {
       case 'comments':
         return { value: { label: "Comment Impressions", color: "hsl(var(--primary))" } };
       case 'posts':
-        return { value: { label: "Post Impressions", color: "hsl(197 100% 35%)" } };
+        return { value: { label: "Post Impressions", color: "hsl(var(--muted-foreground))" } };
       case 'engagements':
-        return { value: { label: "Total Engagements", color: "hsl(142 76% 36%)" } };
+        return { value: { label: "Total Engagements", color: "hsl(var(--muted-foreground))" } };
       default:
         return chartConfig;
     }
@@ -82,16 +82,22 @@ export function EngagementTrends() {
       // Multi-metric chart
       if (chartType === 'area') {
         return (
-          <AreaChart data={chartData} margin={{ left: 12, right: 12, top: 12, bottom: 12 }}>
-            <CartesianGrid vertical={false} strokeDasharray="3 3" />
+          <AreaChart data={chartData} margin={{ left: 20, right: 20, top: 20, bottom: 20 }}>
+            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis
               dataKey="week"
               tickLine={false}
               axisLine={false}
-              tickMargin={8}
+              tickMargin={12}
+              tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
               tickFormatter={(value) => value.replace('Week ', 'W')}
             />
-            <YAxis tickLine={false} axisLine={false} tickMargin={8} />
+            <YAxis 
+              tickLine={false} 
+              axisLine={false} 
+              tickMargin={12}
+              tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+            />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <defs>
               <linearGradient id="fillComments" x1="0" y1="0" x2="0" y2="1">
@@ -99,8 +105,8 @@ export function EngagementTrends() {
                 <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.1}/>
               </linearGradient>
               <linearGradient id="fillPosts" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="hsl(197 100% 35%)" stopOpacity={0.3}/>
-                <stop offset="95%" stopColor="hsl(197 100% 35%)" stopOpacity={0.1}/>
+                <stop offset="5%" stopColor="hsl(var(--muted-foreground))" stopOpacity={0.3}/>
+                <stop offset="95%" stopColor="hsl(var(--muted-foreground))" stopOpacity={0.1}/>
               </linearGradient>
             </defs>
             <Area
@@ -109,33 +115,39 @@ export function EngagementTrends() {
               fill="url(#fillComments)"
               fillOpacity={0.4}
               stroke="hsl(var(--primary))"
-              strokeWidth={2}
+              strokeWidth={3}
             />
             <Area
               dataKey="postImpressions"
               type="monotone"
               fill="url(#fillPosts)"
               fillOpacity={0.4}
-              stroke="hsl(197 100% 35%)"
-              strokeWidth={2}
+              stroke="hsl(var(--muted-foreground))"
+              strokeWidth={3}
             />
           </AreaChart>
         );
       } else {
         return (
-          <BarChart data={chartData} margin={{ left: 12, right: 12, top: 12, bottom: 12 }}>
-            <CartesianGrid vertical={false} strokeDasharray="3 3" />
+          <BarChart data={chartData} margin={{ left: 20, right: 20, top: 20, bottom: 20 }}>
+            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis
               dataKey="week"
               tickLine={false}
               axisLine={false}
-              tickMargin={8}
+              tickMargin={12}
+              tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
               tickFormatter={(value) => value.replace('Week ', 'W')}
             />
-            <YAxis tickLine={false} axisLine={false} tickMargin={8} />
+            <YAxis 
+              tickLine={false} 
+              axisLine={false} 
+              tickMargin={12}
+              tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+            />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            <Bar dataKey="commentImpressions" fill="hsl(var(--primary))" radius={[2, 2, 0, 0]} />
-            <Bar dataKey="postImpressions" fill="hsl(197 100% 35%)" radius={[2, 2, 0, 0]} />
+            <Bar dataKey="commentImpressions" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="postImpressions" fill="hsl(var(--muted-foreground))" radius={[4, 4, 0, 0]} />
           </BarChart>
         );
       }
@@ -143,16 +155,22 @@ export function EngagementTrends() {
       // Single metric chart
       if (chartType === 'area') {
         return (
-          <AreaChart data={data} margin={{ left: 12, right: 12, top: 12, bottom: 12 }}>
-            <CartesianGrid vertical={false} strokeDasharray="3 3" />
+          <AreaChart data={data} margin={{ left: 20, right: 20, top: 20, bottom: 20 }}>
+            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis
               dataKey="week"
               tickLine={false}
               axisLine={false}
-              tickMargin={8}
+              tickMargin={12}
+              tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
               tickFormatter={(value) => value.replace('Week ', 'W')}
             />
-            <YAxis tickLine={false} axisLine={false} tickMargin={8} />
+            <YAxis 
+              tickLine={false} 
+              axisLine={false} 
+              tickMargin={12}
+              tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+            />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <defs>
               <linearGradient id="fillSingle" x1="0" y1="0" x2="0" y2="1">
@@ -166,24 +184,30 @@ export function EngagementTrends() {
               fill="url(#fillSingle)"
               fillOpacity={0.4}
               stroke={config.value?.color}
-              strokeWidth={2}
+              strokeWidth={3}
             />
           </AreaChart>
         );
       } else {
         return (
-          <BarChart data={data} margin={{ left: 12, right: 12, top: 12, bottom: 12 }}>
-            <CartesianGrid vertical={false} strokeDasharray="3 3" />
+          <BarChart data={data} margin={{ left: 20, right: 20, top: 20, bottom: 20 }}>
+            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis
               dataKey="week"
               tickLine={false}
               axisLine={false}
-              tickMargin={8}
+              tickMargin={12}
+              tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
               tickFormatter={(value) => value.replace('Week ', 'W')}
             />
-            <YAxis tickLine={false} axisLine={false} tickMargin={8} />
+            <YAxis 
+              tickLine={false} 
+              axisLine={false} 
+              tickMargin={12}
+              tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+            />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            <Bar dataKey="value" fill={config.value?.color} radius={[4, 4, 0, 0]} />
+            <Bar dataKey="value" fill={config.value?.color} radius={[6, 6, 0, 0]} />
           </BarChart>
         );
       }
@@ -211,72 +235,77 @@ export function EngagementTrends() {
 
   return (
     <section className="animate-slide-up">
-      <div className="mb-6">
-        <h2 className="text-2xl font-source-sans font-semibold text-foreground mb-2">
+      <div className="mb-8">
+        <h2 className="text-3xl font-source-sans font-bold text-foreground mb-3">
           Engagement Trends
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-lg text-muted-foreground">
           Track your LinkedIn engagement performance over time
         </p>
       </div>
 
       <Card className="linkedin-card">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <div className="space-y-1">
-            <CardTitle className="text-base font-source-sans">
-              {getMetricLabel()} Trend
-            </CardTitle>
-            <CardDescription>
-              {selectedMetric === 'all' ? 'Showing multiple metrics' : 'Weekly performance tracking'}
-            </CardDescription>
-          </div>
-          <div className="flex items-center gap-2">
-            <Select value={selectedMetric} onValueChange={(value: MetricType) => setSelectedMetric(value)}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select metric" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Impressions</SelectItem>
-                <SelectItem value="comments">Comment Impressions</SelectItem>
-                <SelectItem value="posts">Post Impressions</SelectItem>
-                <SelectItem value="engagements">Total Engagements</SelectItem>
-              </SelectContent>
-            </Select>
-            <div className="flex border border-border rounded-lg p-1">
-              <Button
-                variant={chartType === 'area' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setChartType('area')}
-                className="h-8 px-3"
-              >
-                <Activity className="h-4 w-4" />
-              </Button>
-              <Button
-                variant={chartType === 'bar' ? 'default' : 'ghost'}
-                size="sm"  
-                onClick={() => setChartType('bar')}
-                className="h-8 px-3"
-              >
-                <BarChart3 className="h-4 w-4" />
-              </Button>
+        <CardHeader className="pb-6">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+            <div className="space-y-2">
+              <CardTitle className="text-2xl font-source-sans font-bold">
+                {getMetricLabel()} Trend
+              </CardTitle>
+              <CardDescription className="text-base">
+                {selectedMetric === 'all' ? 'Showing multiple metrics over 6 weeks' : 'Weekly performance tracking'}
+              </CardDescription>
+            </div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <Select value={selectedMetric} onValueChange={(value: MetricType) => setSelectedMetric(value)}>
+                <SelectTrigger className="w-[200px] h-11">
+                  <SelectValue placeholder="Select metric" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Impressions</SelectItem>
+                  <SelectItem value="comments">Comment Impressions</SelectItem>
+                  <SelectItem value="posts">Post Impressions</SelectItem>
+                  <SelectItem value="engagements">Total Engagements</SelectItem>
+                </SelectContent>
+              </Select>
+              <div className="flex border border-border rounded-lg p-1 bg-muted/30">
+                <Button
+                  variant={chartType === 'area' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setChartType('area')}
+                  className="h-9 px-4"
+                >
+                  <Activity className="h-4 w-4 mr-2" />
+                  Area
+                </Button>
+                <Button
+                  variant={chartType === 'bar' ? 'default' : 'ghost'}
+                  size="sm"  
+                  onClick={() => setChartType('bar')}
+                  className="h-9 px-4"
+                >
+                  <BarChart3 className="h-4 w-4 mr-2" />
+                  Bar
+                </Button>
+              </div>
             </div>
           </div>
         </CardHeader>
-        <CardContent>
-          <div className="h-[300px] w-full">
+        <CardContent className="pt-0">
+          <div className="h-[400px] w-full mb-6">
             <ChartContainer config={selectedMetric === 'all' ? chartConfig : getSingleMetricConfig()}>
               <ResponsiveContainer width="100%" height="100%">
                 {renderChart()}
               </ResponsiveContainer>
             </ChartContainer>
           </div>
-          <div className="flex w-full items-start gap-2 text-sm mt-4">
+          <div className="flex w-full items-start gap-2 text-sm pt-4 border-t border-border">
             <div className="grid gap-2">
-              <div className="flex items-center gap-2 leading-none font-medium">
-                Trending up consistently <TrendingUp className="h-4 w-4 text-green-600" />
+              <div className="flex items-center gap-2 leading-none font-medium text-foreground">
+                <TrendingUp className="h-4 w-4 text-green-600" />
+                Trending up consistently over the past 6 weeks
               </div>
               <div className="text-muted-foreground flex items-center gap-2 leading-none">
-                Current week: {getLatestValue()} • 6-week trend
+                Current week: <span className="font-semibold text-foreground">{getLatestValue()}</span> • 6-week performance overview
               </div>
             </div>
           </div>
